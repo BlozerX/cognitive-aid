@@ -1,5 +1,5 @@
 // ═══ Game Constants ═══
-export const APP_TITLE = "Grid Memory Game";
+export const APP_TITLE = "Cognitive Aid";
 export const LAPSE_THRESHOLD_MS = 8000;
 export const LAPSE_MAX_DURATION_MS = 60000;
 export const GAME_DURATION_MS = 4 * 60 * 1000;

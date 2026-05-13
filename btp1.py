@@ -15,7 +15,7 @@ matplotlib.use("TkAgg")
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
-APP_TITLE = "Grid Memory Game"
+APP_TITLE = "Cognitive Aid"
 DATA_FILE = os.path.join(os.path.expanduser("~"), "Downloads", "memory_game_player_data.json")
 LAPSE_THRESHOLD_MS = 8000
 LAPSE_MAX_DURATION_MS = 60000
