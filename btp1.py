@@ -1677,6 +1677,10 @@ class MemoryGameApp:
             active_bg = "#dceffd"
             fg = "#243447"
 
+            # Clear text for non-objects mode if not selected to remove old letters
+            if cat != "objects" and number not in self.selected:
+                button.configure(text="")
+
             if number in self.selected:
                 bg = "#ffcc80"
                 active_bg = "#ffcc80"

@@ -178,7 +178,7 @@ export class GameUI {
   showLetterOnCell(number, letter) {
     const cell = document.getElementById(`cell-${number}`);
     if (cell && this.engine.gameCategory === "numbers") {
-      cell.innerHTML = `<span class="cell-letter">${letter}</span>`;
+      cell.innerHTML = `<span class="cell-letter" style="display:inline-block; transform: rotate(-${this.engine.rotationDegrees}deg)">${letter}</span>`;
     }
   }
 
@@ -311,7 +311,7 @@ export class GameUI {
     if (cell) {
       cell.classList.add("highlight");
       if (letter && this.engine.gameCategory === "numbers") {
-        cell.innerHTML = `<span class="cell-letter">${letter}</span>`;
+        cell.innerHTML = `<span class="cell-letter" style="display:inline-block; transform: rotate(-${this.engine.rotationDegrees}deg)">${letter}</span>`;
       }
     }
   }
