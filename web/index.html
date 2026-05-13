@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Grid Memory Game — a cognitive assessment tool with multiple game modes, level progression, and professional results dashboard." />
+  <title>Grid Memory Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- ─── HEADER ─── -->
+    <header id="app-header">
+      <h1>Grid Memory Game</h1>
+      <span class="header-badge">Cognitive Assessment Tool</span>
+    </header>
+
+    <div id="main-layout">
+      <!-- ═══ LEFT PANEL ═══ -->
+      <aside id="left-panel">
+        <!-- Player Card -->
+        <div class="card" id="player-card">
+          <h2 class="card-title">Player</h2>
+          <div class="input-row">
+            <label for="player-name">Name</label>
+            <input type="text" id="player-name" placeholder="Enter name" autocomplete="off" />
+          </div>
+          <div class="input-row">
+            <label for="player-age">Age</label>
+            <input type="number" id="player-age" placeholder="Age" min="1" max="120" autocomplete="off" />
+          </div>
+          <p id="current-player-label">No player selected</p>
+        </div>
+
+        <!-- Config Card -->
+        <div class="card" id="config-card">
+          <div class="config-grid">
+            <div>
+              <label for="game-category">Category</label>
+              <select id="game-category">
+                <option value="numbers">Grid</option>
+                <option value="objects">Objects</option>
+              </select>
+            </div>
+            <div>
+              <label for="game-mode">Game Type</label>
+              <select id="game-mode">
+                <option value="normal">Normal</option>
+                <option value="reverse">Mental Reversal</option>
+                <option value="rotate_90">Grid Rotation 90°</option>
+                <option value="rotate_180">Grid Rotation 180°</option>
+                <option value="reverse_rot90">Reversal + Rotation 90°</option>
+                <option value="reverse_rot180">Reversal + Rotation 180°</option>
+                <option value="letter_assoc">Letter Association</option>
+                <option value="letter_reverse">Letter + Reversal</option>
+                <option value="mixed">Mixed (changes each level)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="card" id="action-card">
+          <button id="btn-start" class="btn btn-primary">▶ Start Game</button>
+          <button id="btn-reset" class="btn btn-secondary">⟳ Reset</button>
+          <button id="btn-results" class="btn btn-secondary">📊 Results</button>
+        </div>
+
+        <!-- Game Status -->
+        <div class="card" id="status-card">
+          <h2 class="card-title">Game Status</h2>
+          <p id="status-mode">Current: Normal</p>
+          <p id="status-submode"></p>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="card" id="stats-card">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-label">Level</span>
+              <span class="stat-value" id="stat-level">2</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Score</span>
+              <span class="stat-value" id="stat-score">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Best</span>
+              <span class="stat-value" id="stat-best">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Stars</span>
+              <span class="stat-value" id="stat-stars">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Lives</span>
+              <span class="stat-value" id="stat-lives">❤❤❤</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Accuracy</span>
+              <span class="stat-value" id="stat-accuracy">0%</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ═══ CENTER: GAME AREA ═══ -->
+      <main id="game-area">
+        <div id="message-bar">
+          <p id="message-text">Enter player details, choose a game type, and click Start Game.</p>
+          <p id="timer-text"></p>
+        </div>
+
+        <!-- Grid container (numbers / letters mode) -->
+        <div id="grid-container">
+          <div id="grid-wrapper">
+            <!-- buttons injected by JS -->
+          </div>
+        </div>
+
+        <!-- Canvas for objects (shapes) mode -->
+        <canvas id="shapes-canvas" style="display:none;"></canvas>
+      </main>
+
+      <!-- ═══ RIGHT PANEL ═══ -->
+      <aside id="right-panel">
+        <div class="card">
+          <h2 class="card-title">How to Play</h2>
+          <ol class="how-to-list">
+            <li>Choose Grid or Objects category.</li>
+            <li>Choose a game type before starting.</li>
+            <li>Watch items light up one by one.</li>
+            <li>Normal: repeat same order.</li>
+            <li>Mental Reversal: answer in reverse.</li>
+            <li>Rotation: grid rotates before input.</li>
+            <li>Letter Assoc: click box then type its letter.</li>
+            <li>Mixed: mode changes each level.</li>
+            <li>Get 5 correct in a row to level up.</li>
+            <li>Session lasts 4 minutes.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Session Data</h2>
+          <div class="info-row"><span>Avg Response</span><span id="info-avg-resp">0.0s</span></div>
+          <div class="info-row"><span>Lapses</span><span id="info-lapses">0</span></div>
+          <div class="info-row"><span>Total Lapse Time</span><span id="info-lapse-total">0.0s</span></div>
+          <div class="info-row"><span>Lifetime Accuracy</span><span id="info-lifetime-acc">0%</span></div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Data Controls</h2>
+          <button id="btn-delete-player" class="btn btn-danger">Delete Current Player</button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ═══ POPUP OVERLAY (motivation/error) ═══ -->
+    <div id="popup-overlay" class="popup-overlay hidden">
+      <div id="popup-box" class="popup-box">
+        <p id="popup-text"></p>
+      </div>
+    </div>
+
+    <!-- ═══ RESULTS MODAL ═══ -->
+    <div id="results-modal" class="modal-overlay hidden">
+      <div class="modal-content results-modal-content">
+        <div class="modal-header">
+          <h2>Professional Results Dashboard</h2>
+          <button id="results-close" class="modal-close">&times;</button>
+        </div>
+        <div class="results-controls">
+          <label for="results-player-select">Select Player:</label>
+          <select id="results-player-select"></select>
+        </div>
+        <div id="results-header-info">
+          <h3 id="results-title"></h3>
+          <p id="results-stats"></p>
+        </div>
+        <div id="results-charts-grid">
+          <div class="chart-cell"><canvas id="chart-response-time"></canvas></div>
+          <div class="chart-cell"><canvas id="chart-level-prog"></canvas></div>
+          <div class="chart-cell"><canvas id="chart-mode-acc"></canvas></div>
+          <div class="chart-cell"><canvas id="chart-peak-level"></canvas></div>
+          <div class="chart-cell"><canvas id="chart-lapses"></canvas></div>
+          <div class="chart-cell"><canvas id="chart-resp-by-level"></canvas></div>
+        </div>
+        <p id="results-level-summary"></p>
+      </div>
+    </div>
+
+    <!-- ═══ PASSWORD MODAL ═══ -->
+    <div id="password-modal" class="modal-overlay hidden">
+      <div class="modal-content password-modal-content">
+        <h2>Enter Results Password</h2>
+        <input type="password" id="password-input" placeholder="Password" autocomplete="off" />
+        <div class="modal-buttons">
+          <button id="password-ok" class="btn btn-primary">OK</button>
+          <button id="password-cancel" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
