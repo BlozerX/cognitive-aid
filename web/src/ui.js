@@ -277,7 +277,7 @@ export class GameUI {
 
     for (let number = 1; number <= totalCells; number++) {
       const cell = document.createElement("div");
-      cell.className = "grid-cell";
+      cell.className = "grid-cell" + (isObjects ? " no-border" : "");
       cell.id = `cell-${number}`;
       
       if (isObjects) {

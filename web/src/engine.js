@@ -16,7 +16,7 @@ export class MemoryGameEngine {
     // State variables
     this.started = false;
     this.phase = "idle";
-    this.levelIndex = 0; // 0-indexed, corresponds to level 1
+    this.levelIndex = 1; // 0-indexed, corresponds to level 1. Start at index 1 (Level 2)
     this.sequence = [];
     this.selected = [];
     this.score = 0;
