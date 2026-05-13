@@ -109,7 +109,7 @@ export class MemoryGameEngine {
     this.gameMode = mode;
     this.started = true;
     this.phase = "idle";
-    this.levelIndex = 0;
+    this.levelIndex = 1; // Start from level 2 (index 1) like Python
     this.score = 0;
     this.stars = 0;
     this.lives = 3;
@@ -605,7 +605,7 @@ export class MemoryGameEngine {
     
     this.started = false;
     this.phase = "idle";
-    this.levelIndex = 0;
+    this.levelIndex = 1;
     this.sequence = [];
     this.selected = [];
     this.score = 0;

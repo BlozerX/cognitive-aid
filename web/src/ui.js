@@ -256,10 +256,6 @@ export class GameUI {
   }
 
   onInputPhaseStarted() {
-    if (this.engine.gameCategory === "objects") {
-      this.stopFloatAnimation(); // snap to grid
-      this.rebuildGrid();
-    }
     this.showMessage(this.engine.isLetterMode() ? "Step 1: Click the first cell..." : "Your turn! Repeat the sequence.");
   }
 
@@ -347,8 +343,8 @@ export class GameUI {
   // --- Canvas Floating Animation ---
   resizeCanvas() {
     const rect = this.els.gridContainer.getBoundingClientRect();
-    this.els.shapesCanvas.width = rect.width;
-    this.els.shapesCanvas.height = Math.max(rect.height, 400); // min height
+    this.els.shapesCanvas.width = Math.max(rect.width, 800);
+    this.els.shapesCanvas.height = Math.max(rect.height, 600); // larger minimum height
   }
 
   startFloatAnimation() {

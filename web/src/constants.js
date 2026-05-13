@@ -45,13 +45,13 @@ export const LEVELS = [
 ];
 
 export const SHAPE_CONFIGS = {
-  1: { color: "#87ceeb", size: 70, seed: 137 },
-  2: { color: "#98d8c8", size: 60, seed: 274 },
-  3: { color: "#f7dc6f", size: 80, seed: 411 },
-  4: { color: "#bb8fce", size: 55, seed: 548 },
-  5: { color: "#f1948a", size: 68, seed: 685 },
-  6: { color: "#85c1e9", size: 62, seed: 822 },
-  7: { color: "#82e0aa", size: 75, seed: 959 },
-  8: { color: "#f0b27a", size: 52, seed: 1096 },
-  9: { color: "#d2b4de", size: 65, seed: 1233 },
+  1: { color: "#87ceeb", size: 220, seed: 137 },
+  2: { color: "#87ceeb", size: 180, seed: 274 },
+  3: { color: "#87ceeb", size: 260, seed: 411 },
+  4: { color: "#87ceeb", size: 200, seed: 548 },
+  5: { color: "#87ceeb", size: 240, seed: 685 },
+  6: { color: "#87ceeb", size: 210, seed: 822 },
+  7: { color: "#87ceeb", size: 250, seed: 959 },
+  8: { color: "#87ceeb", size: 190, seed: 1096 },
+  9: { color: "#87ceeb", size: 230, seed: 1233 },
 };
